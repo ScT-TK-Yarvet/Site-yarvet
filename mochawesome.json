@@ -1,0 +1,100 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-02-06T07:12:47.229Z",
+    "end": "2025-02-06T07:13:06.641Z",
+    "duration": 19412,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "5bed044e-a2af-4495-9640-bdea9e27cef5",
+      "title": "",
+      "fullFile": "cypress\\e2e\\yarvet.cy.js",
+      "file": "cypress\\e2e\\yarvet.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3a79da5f-6e7d-4522-88b2-c077b65cdcb0",
+          "title": "Тестирование сайта test.yarvet.ru",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Открывает страницу и выполняет действия по авторизации и покупке товара",
+              "fullTitle": "Тестирование сайта test.yarvet.ru Открывает страницу и выполняет действия по авторизации и покупке товара",
+              "timedOut": null,
+              "duration": 18127,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Открываем главную страницу сайта\ncy.visit('http://test.yarvet.ru/');\n// Нажимаем на кнопку \"Агропромышленный комплекс\"\ncy.contains('Агропромышленный комплекс').click();\n// Нажимаем на кнопку \"Избранное\"\ncy.contains('Избранное').click();\n// Нажимаем на кнопку \"Перейти в каталог\"\ncy.contains('Перейти в каталог').click();\n// Нажимаем на кнопку \"Вход\"\ncy.contains('Вход').click();\n// Ожидаем появления модального окна авторизации\ncy.get('#login').should('be.visible'); // Проверяем, что модальное окно стало видимым\n// Вводим email и пароль\ncy.get('#system-auth-form-login').should('be.visible').clear().type('yvapteka@mail.ru');\ncy.get('#system-auth-form-password').should('be.visible').clear().type('hY7bi7qy');\n// Нажимаем на кнопку входа\ncy.get(':nth-child(7) > .btn').click();\n// Вводим артикул номенклатуры в поле поиска\ncy.get('.header__bottom__content > .header__search > .search > .search-input-wrapper > #search-form-input').should('be.visible').clear().type('УТ-057372');\n// Нажимаем кнопку поиска\ncy.get('.header__bottom__content > .header__search > .search > .search__submit > .btn').click();\n// Выбираем товар\ncy.get('.right-product-col > .item-btn > .btn > .cart-btn-lb').click();\n// Переходим в корзину\ncy.get('.row > .header__order > .header__order-item > #bx_basketV28LEC > .header__order-cart > .js-cart-trigger > .hidden-xs').click();\n// Проверяем количество товаров в корзине\ncy.get(':nth-child(4) > .product__count-wrap > .cart-counter > .form-control').should('have.value', '1'); // Проверка, что значение изменилось на 1\n// Проверяем общую стоимость товаров в корзине\ncy.get('.basket-footer__list__total').invoke('text').then(text => {\n  const cleanedText = text.trim().replace(/[^0-9.,]/g, ''); // Удаляем лишние символы\n  const normalizedText = cleanedText.replace(',', '.'); // Заменяем запятую на точку\n  const actualValue = parseFloat(normalizedText); // Преобразуем строку в число\n  const expectedValue = 99.14; // Ожидаемое значение\n  expect(actualValue).to.equal(expectedValue);\n});\n// Очищаем корзину\ncy.get('.basket-footer__left-top > .delete_all > .js-empty-cart').click();\n// Завершаем тестовый сценарий\ncy.log('Тест успешно выполнен.');",
+              "err": {},
+              "uuid": "80e30f21-6865-4b9f-8b95-b38e3ab49404",
+              "parentUUID": "3a79da5f-6e7d-4522-88b2-c077b65cdcb0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "80e30f21-6865-4b9f-8b95-b38e3ab49404"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 18127,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
